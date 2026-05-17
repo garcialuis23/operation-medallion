@@ -36,7 +36,8 @@ sources:
             tests:
               - not_null
               - accepted_values:
-                  values: ['Air', 'Land', 'Sea', 'Support']
+                  arguments:
+                    values: ['Air', 'Land', 'Sea', 'Support']
           - name: _LOADED_AT
             tests: [not_null]
 
