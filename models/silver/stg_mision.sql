@@ -40,6 +40,11 @@ with source as (
             else null
         end                                                     as tiene_mandato_onu,
         trim(after_action_report)                               as informe_post_accion,
+        try_cast(trim(troops_deployed) as integer)              as tropas_desplegadas,
+        try_cast(trim(air_assets_deployed) as integer)          as activos_aereos_desplegados,
+        try_cast(trim(naval_assets_deployed) as integer)        as activos_navales_desplegados,
+        try_cast(trim(casualties) as integer)                   as bajas,
+        try_cast(trim(mission_cost_m_usd) as float)             as coste_mision_m_usd,
         try_cast(trim(public_support_pct) as float)             as pct_apoyo_publico,
         _loaded_at
     from {{ ref('bronze_operations_missions') }}
@@ -59,6 +64,8 @@ with_hash as (
             coalesce(resultado_mision,       '') || '|' ||
             coalesce(tipo_liderazgo,         '') || '|' ||
             coalesce(cast(tiene_mandato_onu as varchar), '') || '|' ||
+            coalesce(cast(bajas as varchar), '') || '|' ||
+            coalesce(cast(coste_mision_m_usd as varchar), '') || '|' ||
             coalesce(cast(pct_apoyo_publico as varchar), '')
         )                                                       as hash_diff
     from source
@@ -107,6 +114,11 @@ select
     cobertura_mediatica,
     tipo_liderazgo,
     tiene_mandato_onu,
+    tropas_desplegadas,
+    activos_aereos_desplegados,
+    activos_navales_desplegados,
+    bajas,
+    coste_mision_m_usd,
     informe_post_accion,
     pct_apoyo_publico,
     hash_diff,
