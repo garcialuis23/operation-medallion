@@ -137,6 +137,12 @@ models:
                 values: ['gold', 'silver', 'bronze']
       - name: athlete_id
         description: "FK → dim_athlete. Identificador Wikidata del atleta."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_athlete')
+                field: athlete_id
       - name: athlete_name
         description: "Nombre completo del atleta."
       - name: date_of_birth
@@ -153,6 +159,12 @@ models:
         description: "Longitud del lugar de nacimiento (FLOAT)."
       - name: country_id
         description: "FK → dim_country. País acreedor de la medalla. 'N/A' para refugiados y neutrales AIN."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_country')
+                field: country_id
       - name: country_name
         description: "Nombre del país acreedor."
       - name: country_code2
@@ -167,6 +179,12 @@ models:
         description: "Nombre de la delegación olímpica."
       - name: event_id
         description: "FK → dim_event. Identificador Wikidata del evento."
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_event')
+                field: event_id
       - name: event_name
         description: "Nombre completo del evento olímpico."
       - name: discipline_name
@@ -175,6 +193,13 @@ models:
         description: "Nombre del deporte del evento."
       - name: nuts3_id
         description: "FK → dim_nuts. Código NUTS3 del lugar de nacimiento. NULL para atletas no europeos."
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_nuts')
+                field: nuts3_id
+              config:
+                severity: warn
       - name: nuts3_name
         description: "Nombre de la unidad NUTS3."
       - name: nuts2_id
