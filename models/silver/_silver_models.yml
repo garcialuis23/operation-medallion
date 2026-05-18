@@ -16,9 +16,9 @@ models:
         tests: [not_null, unique]
       - name: wikidata_id_pais
         tests:
-          - name: not_null
-            config:
-              severity: warn
+          - not_null:
+              config:
+                severity: warn
           - relationships:
               arguments:
                 to: ref('silver_country')
@@ -52,6 +52,12 @@ models:
         tests: [not_null, unique]
       - name: nombre
         tests: [not_null]
+      - name: wikidata_id_disciplina
+        tests:
+          - relationships:
+              arguments:
+                to: ref('silver_discipline')
+                field: wikidata_id_disciplina
 
   - name: silver_nuts_region
     description: "Jerarquía NUTS europea (niveles 0-3). Tabla auto-jerárquica con id_nuts_padre."
@@ -72,9 +78,11 @@ models:
         tests: [not_null, unique]
       - name: nombre
         tests:
-          - name: not_null
-            config:
-              severity: warn
+          - not_null:
+              config:
+                severity: warn
+
+  - name: silver_athlete
     description: "Atletas únicos que ganaron al menos una medalla en París 2024."
     columns:
       - name: wikidata_id_atleta
@@ -116,9 +124,9 @@ models:
                 field: wikidata_id_delegacion
       - name: wikidata_id_pais
         tests:
-          - name: not_null
-            config:
-              severity: warn
+          - not_null:
+              config:
+                severity: warn
           - relationships:
               arguments:
                 to: ref('silver_country')

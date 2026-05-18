@@ -14,3 +14,7 @@ select
 from {{ ref('bronze_medalists_raw') }}
 where nullif(medalist_wikidata_id, 'NA') is not null
   and nullif(event_wikidata_id, 'NA') is not null
+  and (
+      nullif(country_medal_wikidata_id, 'NA') is null
+      or nullif(country_medal_wikidata_id, 'NA') in (select wikidata_id_pais from {{ ref('silver_country') }})
+  )

@@ -8,3 +8,7 @@ select distinct
 
 from {{ ref('bronze_medalists_raw') }}
 where nullif(event_wikidata_id, 'NA') is not null
+  and (
+      nullif(event_part_of_wikidata_id, 'NA') is null
+      or nullif(event_part_of_wikidata_id, 'NA') in (select wikidata_id_disciplina from {{ ref('silver_discipline') }})
+  )
