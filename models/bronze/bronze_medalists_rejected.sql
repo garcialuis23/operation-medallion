@@ -11,8 +11,7 @@ select
             THEN 'medalist_name es NULL'
         ELSE
             'medal inválido: ' || COALESCE(medal, 'NULL')
-    END                                                                   as rejection_reason,
-    CURRENT_TIMESTAMP()                                                   as _loaded_at
+    END                                                                   as rejection_reason
 
 from {{ source('bronze', 'MEDALISTS_2024') }}
 where
@@ -44,8 +43,7 @@ select
             )
         ),
         ' | '
-    )                                                                     as rejection_reason,
-    CURRENT_TIMESTAMP()                                                   as _loaded_at
+    )                                                                     as rejection_reason
 
 from {{ source('bronze', 'MEDALISTS_2024') }}
 where
