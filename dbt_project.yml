@@ -1,4 +1,4 @@
-name: '2024-medalists-all'
+name: 'medalists_all_2024'
 version: '1.0.0'
 config-version: 2
 
@@ -17,7 +17,7 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  2024-medalists-all:
+  medalists_all_2024:
     bronze:
       +materialized: table
       +database: "{{ 'BRONZE_DB_PRO' if target.name == 'pro' else 'BRONZE_DB_DEV' }}"
@@ -25,11 +25,9 @@ models:
     silver:
       +materialized: table
       +transient: false
-      +database: "{{ 'BRONZE_DB_PRO' if target.name == 'pro' else 'BRONZE_DB_DEV' }}"
-
+      +database: "{{ 'SILVER_DB_PRO' if target.name == 'pro' else 'SILVER_DB_DEV' }}"
 
     gold:
       +materialized: table
       +transient: false
-      +database: "{{ 'BRONZE_DB_PRO' if target.name == 'pro' else 'BRONZE_DB_DEV' }}"
-
+      +database: "{{ 'GOLD_DB_PRO' if target.name == 'pro' else 'GOLD_DB_DEV' }}"
