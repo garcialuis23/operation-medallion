@@ -14,6 +14,6 @@ select
     p.longitud                  as birthplace_lon,
     p.id_nuts3                  as birthplace_nuts3_id
 
-from {{ ref('silver_athlete') }} a
-left join {{ ref('silver_place') }} p
+from {{ ref('silver_atleta') }} a
+left join {{ ref('silver_lugar') }} p
     on a.wikidata_id_lugar = p.wikidata_id_lugar

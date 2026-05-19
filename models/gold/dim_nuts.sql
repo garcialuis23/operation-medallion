@@ -20,11 +20,11 @@ select
     n0.id_nuts          as nuts0_id,
     n0.nombre           as nuts0_name
 
-from {{ ref('silver_nuts_region') }} n3
-left join {{ ref('silver_nuts_region') }} n2
+from {{ ref('silver_region_nuts') }} n3
+left join {{ ref('silver_region_nuts') }} n2
     on n3.id_nuts_padre = n2.id_nuts
-left join {{ ref('silver_nuts_region') }} n1
+left join {{ ref('silver_region_nuts') }} n1
     on n2.id_nuts_padre = n1.id_nuts
-left join {{ ref('silver_nuts_region') }} n0
+left join {{ ref('silver_region_nuts') }} n0
     on n1.id_nuts_padre = n0.id_nuts
 where n3.nivel = 3

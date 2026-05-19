@@ -11,8 +11,8 @@ select
     s.wikidata_id_deporte       as sport_id,
     s.nombre                    as sport_name
 
-from {{ ref('silver_event') }} e
-left join {{ ref('silver_discipline') }} d
+from {{ ref('silver_evento') }} e
+left join {{ ref('silver_disciplina') }} d
     on e.wikidata_id_disciplina = d.wikidata_id_disciplina
-left join {{ ref('silver_sport') }} s
+left join {{ ref('silver_deporte') }} s
     on d.wikidata_id_deporte = s.wikidata_id_deporte

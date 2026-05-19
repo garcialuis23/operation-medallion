@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: dim_country
+  - name: dim_pais
     description: >
       Dimensión de países Gold. Una fila por país (90 registros, incluido 'País Desconocido').
       Combina atributos descriptivos del país (códigos ISO, IOC) con métricas de medallas
@@ -27,12 +27,12 @@ models:
         description: "Total de medallas acreditadas al país en París 2024."
       - name: gold_medals
         description: "Número de medallas de oro del país."
-      - name: silver_medals
+      - name: silver_medallas
         description: "Número de medallas de plata del país."
       - name: bronze_medals
         description: "Número de medallas de bronce del país."
 
-  - name: dim_athlete
+  - name: dim_atleta
     description: >
       Dimensión de atletas Gold (1,949 registros). Desnormaliza el lugar de nacimiento
       de silver_place directamente en el atleta: nombre del lugar, región, coordenadas
@@ -61,7 +61,7 @@ models:
       - name: birthplace_nuts3_id
         description: "Código NUTS3 del lugar de nacimiento. NULL para atletas no europeos (aprox. 56% del dataset)."
 
-  - name: dim_event
+  - name: dim_evento
     description: >
       Dimensión de eventos Gold (325 registros). Aplanada (flattened): una sola fila
       por evento contiene el nombre del evento, su disciplina y su deporte, evitando
@@ -117,7 +117,7 @@ models:
       - name: nuts0_name
         description: "Nombre del país NUTS0."
 
-  - name: fact_medal
+  - name: fact_medalla
     description: >
       Tabla de hechos analítica Gold (2,202 registros). Una fila por medalla con todas
       las dimensiones resueltas y desnormalizadas: atleta (datos demográficos y geográficos),
@@ -141,7 +141,7 @@ models:
           - not_null
           - relationships:
               arguments:
-                to: ref('dim_athlete')
+                to: ref('dim_atleta')
                 field: athlete_id
       - name: athlete_name
         description: "Nombre completo del atleta."
@@ -163,7 +163,7 @@ models:
           - not_null
           - relationships:
               arguments:
-                to: ref('dim_country')
+                to: ref('dim_pais')
                 field: country_id
       - name: country_name
         description: "Nombre del país acreedor."
@@ -183,7 +183,7 @@ models:
           - not_null
           - relationships:
               arguments:
-                to: ref('dim_event')
+                to: ref('dim_evento')
                 field: event_id
       - name: event_name
         description: "Nombre completo del evento olímpico."

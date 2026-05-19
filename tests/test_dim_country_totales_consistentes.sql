@@ -5,5 +5,5 @@ SELECT
     name,
     total_medals,
     gold_medals + silver_medals + bronze_medals AS suma_calculada
-FROM {{ ref('dim_country') }}
+FROM {{ ref('dim_pais') }}
 WHERE total_medals != gold_medals + silver_medals + bronze_medals

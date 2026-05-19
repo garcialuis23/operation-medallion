@@ -14,8 +14,8 @@ select
     count(case when m.tipo = 'silver' then 1 end)               as silver_medals,
     count(case when m.tipo = 'bronze' then 1 end)               as bronze_medals
 
-from {{ ref('silver_country') }} c
-left join {{ ref('silver_medal') }} m
+from {{ ref('silver_pais') }} c
+left join {{ ref('silver_medalla') }} m
     on c.wikidata_id_pais = m.wikidata_id_pais
 
 group by 1, 2, 3, 4, 5, 6

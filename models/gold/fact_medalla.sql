@@ -44,9 +44,9 @@ select
     n.nuts0_id,
     n.nuts0_name                        as nuts_country_name
 
-from {{ ref('silver_medal') }} m
-join {{ ref('dim_athlete') }}     a  on m.wikidata_id_atleta     = a.athlete_id
-join {{ ref('silver_country') }}  c  on m.wikidata_id_pais        = c.wikidata_id_pais
-join {{ ref('silver_delegation') }} d on m.wikidata_id_delegacion = d.wikidata_id_delegacion
-join {{ ref('dim_event') }}       e  on m.wikidata_id_evento      = e.event_id
+from {{ ref('silver_medalla') }} m
+join {{ ref('dim_atleta') }}     a  on m.wikidata_id_atleta     = a.athlete_id
+join {{ ref('silver_pais') }}  c  on m.wikidata_id_pais        = c.wikidata_id_pais
+join {{ ref('silver_delegacion') }} d on m.wikidata_id_delegacion = d.wikidata_id_delegacion
+join {{ ref('dim_evento') }}       e  on m.wikidata_id_evento      = e.event_id
 left join {{ ref('dim_nuts') }}   n  on a.birthplace_nuts3_id     = n.nuts3_id
